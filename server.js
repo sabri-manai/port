@@ -5,7 +5,8 @@ const nodemailer = require("nodemailer");
 
 // server used to send send emails
 const app = express();
-app.use(cors());
+app.use(cors({ origin: ['https://sabri-manai.herokuapp.com/'], }));
+app.options('*', cors()) // include before other routes
 app.use("/", router);
 app.use(express.json());
 app.use(function(req, res, next) {
@@ -15,7 +16,7 @@ app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Credentials', true);
   // handle OPTIONS method
   if ('OPTIONS' == req.method) {
-      return res.sendStatus(404);
+      return res.sendStatus(200);
   } else {
       next();
   }
