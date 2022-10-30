@@ -5,9 +5,8 @@ const nodemailer = require("nodemailer");
 
 // server used to send send emails
 const app = express();
-app.use(cors());
+app.use(cors({origin:["https://sabri-manai.herokuapp.com/"]}));
 app.use(express.json());
-app.use("/", router);
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, PATCH, DELETE');
@@ -20,6 +19,7 @@ app.use(function(req, res, next) {
       next();
   }
 });
+app.use("/", router);
 // if (process.env.NOOE_INV === "production") {
 //   app.use(express.static( 'build'));
 //   app.get("*", (req, res) =>{
