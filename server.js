@@ -6,6 +6,7 @@ const nodemailer = require("nodemailer");
 // server used to send send emails
 const app = express();
 app.use(cors());
+app.use("/", router);
 app.use(express.json());
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -19,14 +20,7 @@ app.use(function(req, res, next) {
       next();
   }
 });
-app.use("/", router);
-// if (process.env.NOOE_INV === "production") {
-//   app.use(express.static( 'build'));
-//   app.get("*", (req, res) =>{
-//    req.sendFile(path.resolve(_dirnane, "build", "index.html"));
-//   })
-// }
-//app.listen(process.env.PORT||5000, () => console.log("Server Running"));
+
 const PORT = process.env.PORT || 5000  
 
 express().listen(PORT, () => console.log(`Listening on ${ PORT }`))
@@ -49,7 +43,7 @@ contactEmail.verify((error) => {
   }
 });
 
-router.post("/contact", (req, res) => {
+router.post("/contact", async(req, res) => {
   const name = req.body.firstName + req.body.lastName;
   const email = req.body.email;
   const message = req.body.message;
