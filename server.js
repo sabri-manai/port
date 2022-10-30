@@ -5,7 +5,7 @@ const nodemailer = require("nodemailer");
 
 // server used to send send emails
 const app = express();
-app.use(cors({origin:["https://sabri-manai.herokuapp.com/"]}));
+app.use(cors({origin:["http://sabri-manai.herokuapp.com/"]}));
 app.use(express.json());
 app.use(function(req, res, next) {
   res.setHeader('Access-Control-Allow-Origin', '*');
